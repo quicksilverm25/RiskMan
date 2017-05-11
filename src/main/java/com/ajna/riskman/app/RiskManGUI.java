@@ -564,7 +564,10 @@ public class RiskManGUI extends Application implements MarketDataClientInterface
 		TableColumn<OrderTableModel, String> posplColumn = new TableColumn<OrderTableModel, String>("PosPL");
 		posplColumn.setCellValueFactory(new PropertyValueFactory<OrderTableModel, String>("posPLStr"));
 		
-		tableView.getColumns().addAll(oidColumn, dateColumn, symColumn, qtyColumn, sideColumn, prcColumn, ltpColumn, optColumn, expiryColumn, strikeColumn, spotColumn, dayplColumn, posplColumn );
+		TableColumn<OrderTableModel, String> marginColumn = new TableColumn<OrderTableModel, String>("~Margin");
+		marginColumn.setCellValueFactory(new PropertyValueFactory<OrderTableModel, String>("marginStr"));
+		
+		tableView.getColumns().addAll(oidColumn, dateColumn, symColumn, qtyColumn, sideColumn, prcColumn, ltpColumn, optColumn, expiryColumn, strikeColumn, spotColumn, dayplColumn, posplColumn, marginColumn );
 		
 		
 	    //Add change listener

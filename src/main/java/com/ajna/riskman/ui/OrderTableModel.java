@@ -39,6 +39,9 @@ public class OrderTableModel  {
 	
 	SimpleStringProperty dayPLStr   = new SimpleStringProperty();
 	SimpleStringProperty posPLStr  = new SimpleStringProperty();
+	SimpleStringProperty marginStr = new SimpleStringProperty();
+	SimpleDoubleProperty margin   = new SimpleDoubleProperty();
+	
 	
 	public OrderTableModel( Integer mOid, String mEntry, String mSymbol, Integer mQuantity, String mSide,
 			Double mPrice, String mOptionType, String mExpiry, Double mStrike) {
@@ -60,8 +63,11 @@ public class OrderTableModel  {
 		this.dayPL.set(0);
 		this.posPL.set(0);
 		
+		this.margin.set(0);
 		this.dayPLStr.set("0.00");
 		this.posPLStr.set("0.00");
+		this.marginStr.set("0.00");
+		
 		
 		mdKey = mSymbol.toUpperCase() + "_" + mExpiry.toUpperCase() + "_" + mSide + "_" + mOptionType + "_"  + mStrike ;
  
@@ -221,6 +227,20 @@ public class OrderTableModel  {
 		this.posPLStr.set(posPLStr);
 	}
 
+	public String getMarginStr() {
+		return marginStr.get();
+	}
+
+
+
+	public void setMargin(Double marg) {
+		this.margin.set(marg);
+		this.setMarginStr(formatter.format(marg));
+	}
+ 
+	public void setMarginStr(String mrgnStr) {
+		this.marginStr.set(mrgnStr);
+	}
 	
 	public void computePL() {
 		 if(side.get().equalsIgnoreCase("Buy")){
@@ -252,6 +272,10 @@ public class OrderTableModel  {
 					prem += redu;
 				 }
 			 this.setPosPL(prem);
+			 
+			 
+			 this.setMargin(quantity.get() * spot.get() * 0.14);
+			 
 		 }
 		
 		
